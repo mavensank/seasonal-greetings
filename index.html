@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Seasonal Greetings</title>
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap"
+		rel="stylesheet">
+	<style>
+		.font-sansita {
+			font-family: 'Sansita', sans-serif;
+		}
+
+		.font-sans {
+			font-family: 'Open Sans', sans-serif;
+		}
+	</style>
+</head>
+
+<body>
+	<div x-data="app()" class="container mx-auto pt-2">
+		<div class="h-1/2 flex items-center justify-center">
+			<div class="flex bg-gray-200 shadow-md">
+				<img x-bind:src="$data.selectedImage" class="w-1/2">
+				<div class="w-1/2 flex flex-col items-center justify-around rounded-r-lg">
+					<h1 x-text="$data.greetingText" class="text-3xl capitalize font-sansita"> </h1>
+					<div class="text-center">
+						<p class="text-lg text-gray-600">From</p>
+						<p x-text="$data.greetingFrom" class="text-xl font-medium text-gray-800"></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="py-2 flex items-center justify-center ">
+			<a href="/index.html" class="text text-blue-400 underline mr-2">Create a New Greeting Card</a>
+			<p class="text-gray-400">@2024 by <a href="https://ko-fi.com/mavensank" target="_blank"
+					rel="noopener noreferrer" class="underline">Mavensank</a></p>
+		</div>
+
+
+	</div>
+
+	</div>
+	<script>
+		function app() {
+			const urlParams = new URLSearchParams(window.location.search);
+			return {
+				greetingText: urlParams.get('text'),
+				greetingFrom: urlParams.get('from'),
+				selectedImage: urlParams.get('image'),
+			}
+		}
+
+	</script>
+</body>
+
+</html>

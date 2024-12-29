@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Seasonal Greetings</title>
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap"
+		rel="stylesheet">
+	<style>
+		.font-sansita {
+			font-family: 'Sansita', sans-serif;
+		}
+
+		.font-sans {
+			font-family: 'Open Sans', sans-serif;
+		}
+	</style>
+</head>
+
+<body class="bg-white font-sans">
+	<div x-data="app()" class="container mx-auto py-16">
+		<div class="flex gap-4">
+			<div class="w-1/3 border border-gray-300 rounded-lg shadow-md p-4">
+				<div class="space-y-4">
+					<textarea id="greeting-text" x-model="greetingText" rows="2"
+						placeholder="Enter a greeting message (e.g. Merry Christmas!)"
+						class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"></textarea>
+					<input type="text" name="txt-from" id="txt-from" x-model="greetingFrom"
+						class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+						placeholder="From">
+
+					<div class="image-options">
+						<h2 class="mb-2">Image</h2>
+						<div class="flex flex-wrap">
+							<template x-for="image in $data.images" :key="image">
+								<img :src="image" @click="updateImage(image)"
+									class="w-16 mr-2 rounded-md cursor-pointer">
+							</template>
+						</div>
+					</div>
+
+
+					<div class="relative">
+						<textarea x-text="$data.generatedUrl"
+							class="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+							rows="4"></textarea>
+						<button x-on:click="$data.copyUrl" class="absolute top-0 right-0 text-black p-2">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+								fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+								stroke-linejoin="round" class="feather feather-copy">
+								<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+								<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+							</svg>
+						</button>
+					</div>
+					<button x-on:click="$data.generateEncodedUrl"
+						class="w-full bg-gray-500 text-white p-2 rounded-md hover:bg-blue-600">Generate URL</button>
+				</div>
+			</div>
+			<div class="w-2/3 bg-gray-100 p-0  shadow-md flex" style="aspect-ratio: 10 / 7">
+				<img x-bind:src="$data.selectedImage" class="w-1/2">
+				<div class="w-1/2 flex flex-col items-center justify-around rounded-r-lg">
+					<h1 x-text="$data.greetingText" class="text-3xl capitalize font-sansita"> </h1>
+					<div class="text-center">
+						<p class="text-lg text-gray-600">From</p>
+						<p x-text="$data.greetingFrom" class="text-xl font-medium text-gray-800"></p>
+					</div>
+					<p class="text-xs text-gray-400">@2024 by <a href="https://ko-fi.com/mavensank" target="_blank"
+							rel="noopener noreferrer">Mavensank</a></p>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	</div>
+	<script>
+		function app() {
+			return {
+				greetingText: 'Merry Christmas!',
+				greetingFrom: 'John Doe',
+				selectedImage: 'https://images.unsplash.com/photo-1482003297000-b7663a1673f1?q=80&w=1024',
+				generatedUrl: '',
+				images: [
+					'https://images.unsplash.com/photo-1482003297000-b7663a1673f1?q=80&w=1024',
+					'https://via.placeholder.com/300x200/33FF57/fff?text=Merry+Christmas',
+					'https://via.placeholder.com/300x200/5733FF/fff?text=Happy+New+Year',
+					'https://via.placeholder.com/300x200/FF33A0/fff?text=Best+Wishes'
+				],
+
+				updateImage(image) {
+					this.selectedImage = image;
+				},
+
+				generateEncodedUrl() {
+					const cardData = {
+						text: this.greetingText,
+						from: this.greetingFrom,
+						image: this.selectedImage,
+					};
+
+					const urlParams = new URLSearchParams(cardData).toString();
+
+
+					this.generatedUrl = window.location.origin + '/index.html?' + urlParams;
+
+
+				},
+				copyUrl() {
+					navigator.clipboard.writeText(this.generatedUrl)
+						.then(() => {
+							alert("Sharable URL copied to clipboard!");
+						})
+						.catch(err => {
+							alert("Error copying URL: ", err);
+						});
+				}
+			};
+		}
+	</script>
+</body>
+
+</html>
