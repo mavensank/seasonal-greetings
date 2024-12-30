@@ -49,9 +49,12 @@
 						<div class="flex flex-wrap">
 							<template x-for="image in $data.images" :key="image">
 								<img :src="image" @click="updateImage(image)"
-									class="w-16 mr-2 rounded-md cursor-pointer">
+									class="w-16 mr-2 mb-2 rounded-md cursor-pointer">
 							</template>
 						</div>
+						<input type="text" name="txt-from" id="txt-from" x-model="customImageUrl"
+						class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+						placeholder="Custom Image URL">
 					</div>
 
 
@@ -72,10 +75,10 @@
 						class="w-full bg-gray-500 text-white p-2 rounded-md hover:bg-blue-600">Generate URL</button>
 				</div>
 			</div>
-			<div class="w-2/3 bg-gray-100 p-0  shadow-md flex" style="aspect-ratio: 10 / 7">
-				<img x-bind:src="$data.selectedImage" class="w-1/2">
-				<div class="w-1/2 flex flex-col items-center justify-around rounded-r-lg">
-					<h1 x-text="$data.greetingText" class="text-3xl capitalize font-sansita"> </h1>
+			<div class="w-2/3 bg-gray-100 p-0 shadow-md flex flex-col sm:flex-row" style="aspect-ratio: 10 / 7">
+				<img x-bind:src="$data.selectedImage" class="w-full sm:w-1/2 object-cover">
+				<div class="w-full sm:w-1/2 py-4 flex flex-col items-center justify-around">
+					<h1 x-text="$data.greetingText" class="text-center text-3xl capitalize font-sansita"> </h1>
 					<div class="text-center">
 						<p class="text-lg text-gray-600">From</p>
 						<p x-text="$data.greetingFrom" class="text-xl font-medium text-gray-800"></p>
@@ -95,15 +98,15 @@
 	<script>
 		function app() {
 			return {
-				greetingText: 'Merry Christmas!',
+				greetingText: 'Happy new year 2025!',
 				greetingFrom: 'John Doe',
-				selectedImage: 'https://images.unsplash.com/photo-1482003297000-b7663a1673f1?q=80&w=1024',
+				selectedImage: 'https://images.unsplash.com/photo-1513546493312-0066d7de3fd2?q=80&w=1024',
 				generatedUrl: '',
 				images: [
 					'https://images.unsplash.com/photo-1482003297000-b7663a1673f1?q=80&w=1024',
-					'https://via.placeholder.com/300x200/33FF57/fff?text=Merry+Christmas',
-					'https://via.placeholder.com/300x200/5733FF/fff?text=Happy+New+Year',
-					'https://via.placeholder.com/300x200/FF33A0/fff?text=Best+Wishes'
+					'https://img.freepik.com/free-vector/beautiful-merry-christmas-banner-with-silver-particles_69286-49.jpg?w=1024',
+					'https://img.freepik.com/free-photo/new-year-greeting-card-celebration_23-2151895392.jpg?w=1024',
+					'https://images.unsplash.com/photo-1513546493312-0066d7de3fd2?q=80&w=1024'
 				],
 
 				updateImage(image) {
