@@ -49,7 +49,7 @@
 						<div class="flex flex-wrap">
 							<template x-for="image in $data.images" :key="image">
 								<img :src="image" @click="updateImage(image)"
-									class="w-16 mr-2 mb-2 rounded-md cursor-pointer">
+									class="w-16 mr-2 mb-2 rounded-md object-cover cursor-pointer">
 							</template>
 						</div>
 						<input type="text" id="txt-from" @keyup.enter="updateImage($event.target.value)"
@@ -105,7 +105,11 @@
 					'https://images.unsplash.com/photo-1482003297000-b7663a1673f1?q=80&w=1024',
 					'https://img.freepik.com/free-vector/beautiful-merry-christmas-banner-with-silver-particles_69286-49.jpg?w=1024',
 					'https://img.freepik.com/free-photo/new-year-greeting-card-celebration_23-2151895392.jpg?w=1024',
-					'https://images.unsplash.com/photo-1513546493312-0066d7de3fd2?q=80&w=1024'
+					'https://images.unsplash.com/photo-1513546493312-0066d7de3fd2?q=80&w=1024',
+					'https://cdn.openart.ai/uploads/image_j2dwygHG_1725023067710_raw.jpg',
+					'https://cdn.openart.ai/published/M3K2ZMMnxdW16OVgSiBn/ZJ9jsn4F_EXnG_1024.webp',
+					'https://i.pinimg.com/736x/16/50/61/165061d25dc4b0935787634a2ec32aa5.jpg',
+					'https://images.unsplash.com/photo-1672622923872-49056bdba559?q=80&w=1024'
 				],
 
 				updateImage(image) {
