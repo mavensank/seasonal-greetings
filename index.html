@@ -34,11 +34,11 @@
 </head>
 
 <body>
-	<div x-data="app()" class="container mx-auto pt-2">
+	<div x-data="app()" class="container mx-auto p-2">
 		<div class="h-1/2 flex items-center justify-center">
-			<div class="flex bg-gray-200 shadow-md">
-				<img x-bind:src="$data.selectedImage" class="w-1/2">
-				<div class="w-1/2 flex flex-col items-center justify-around rounded-r-lg" x-show="$data.greetingText">
+			<div class="flex flex-col sm:flex-row bg-gray-200 shadow-md">
+				<img x-bind:src="$data.selectedImage" class="w-full sm:w-1/2">
+				<div class="w-full sm:w-1/2 py-4 flex flex-col items-center justify-around rounded-r-lg" x-show="$data.greetingText">
 					<h1 x-text="$data.greetingText" class="text-3xl capitalize font-sansita"> </h1>
 					<div class="text-center">
 						<p class="text-lg text-gray-600">From</p>
